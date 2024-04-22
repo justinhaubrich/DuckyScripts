@@ -1,0 +1,128 @@
+ID 05ac:021e Apple:Keyboard
+REM initialize an empty array to store unique file extensions
+DELAY 1000
+GUI SPACE
+DELAY 500
+STRING terminal
+ENTER
+DELAY 500
+
+GUI n
+DELAY 500
+
+STRING cd ~/Desktop
+ENTER
+DELAY 500
+STRING declare -a extensions
+ENTER
+DELAY 500
+REM Loop through all files in the current directory
+ENTER
+STRING for f in *; do
+ENTER
+DELAY 500
+REM Loop through all files in the current directory
+REM Get the file extension (everything after the last dot)
+ENTER
+STRING ext="${f##*.}"
+ENTER
+DELAY 500
+REM Loop through all files in the current directory
+REM Add the extension to the array if it's not already there
+STRING if ! echo "${extensions[@]}" | grep -q "$ext"; then
+ENTER
+DELAY 500
+REM Loop through all files in the current directory
+STRING extensions+=("$ext")
+ENTER
+DELAY 500
+REM Loop through all files in the current directory
+STRING fi
+ENTER
+DELAY 500
+REM Loop through all files in the current directory
+STRING done
+ENTER
+DELAY 500
+REM Loop through all files in the current directory
+REM Print the list of unique file extensions
+STRING echo "Unique file extensions:"
+ENTER
+DELAY 500
+REM Loop through all files in the current directory
+STRING for ext in "${extensions[@]}"; do
+ENTER
+DELAY 500
+REM Loop through all files in the current directory
+STRING echo "$ext"
+ENTER
+DELAY 500
+REM Loop through all files in the current directory
+STRING EXTENSION="$ext"
+ENTER
+DELAY 500
+REM Loop through all files in the current directory
+REM Set the target directory and file extension
+ENTER
+STRING TARGET_ROOT="./Organized/"
+DELAY 500
+REM Loop through all files in the current directory
+ENTER
+STRING TARGET_DIR="$TARGET_ROOT/$ext/"
+DELAY 500
+REM Loop through all files in the current directory
+ENTER
+REM create the target dir if it doesn't exist
+STRING if [ ! -d "$TARGET_ROOT" ]; then
+DELAY 500
+REM Loop through all files in the current directory
+ENTER
+STRING mkdir -p "$TARGET_ROOT"
+ENTER
+DELAY 500
+REM Loop through all files in the current directory
+STRING fi
+ENTER
+REM create the target dir if it doesn't exist
+REM Loop through all files in the current directory
+STRING if [ ! -d "$TARGET_DIR" ]; then
+ENTER
+DELAY 500
+STRING mkdir -p "$TARGET_DIR"
+ENTER
+DELAY 500
+REM Loop through all files in the current directory
+STRING fi
+ENTER
+DELAY 500
+REM Loop through all files in the current directory
+ENTER
+STRING for f in *; do
+ENTER
+DELAY 500
+REM Check if the file matches the desired extension
+ENTER
+STRING if [[ $f == *.${EXTENSION} ]]; then
+ENTER
+DELAY 500
+REM Move the file to the target directory
+REM i option to prevent overwrite
+STRING mv -i "$f" "$TARGET_DIR/$f"
+ENTER
+DELAY 500
+STRING fi
+ENTER
+DELAY 500
+STRING done
+ENTER
+DELAY 500
+STRING done
+ENTER
+DELAY 500
+
+STRING find $TARGET_ROOT -empty -type d -delete
+DELAY 200
+ENTER
+
+GUI w
+ENTER
