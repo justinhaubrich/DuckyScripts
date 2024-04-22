@@ -1,3 +1,7 @@
+REM This ducky script will organize your desktop directory
+REM Organized files will be saved at ~/Desktop/Organized/ (TARGET_ROOT)
+REM Script by Justin Haubrich, https://jhaubrich.com
+
 ID 05ac:021e Apple:Keyboard
 REM initialize an empty array to store unique file extensions
 DELAY 1000
