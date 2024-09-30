@@ -1,5 +1,6 @@
 REM Windows Ducky Script for File Organization
 REM This script organizes files on the Desktop by their extensions
+REM Script by Justin Haubrich, https://jhaubrich.com
 
 REM Initialize
 DELAY 1000
