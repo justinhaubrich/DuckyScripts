@@ -1,0 +1,69 @@
+REM Windows Ducky Script for File Organization
+REM This script organizes files on the Desktop by their extensions
+
+REM Initialize
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell
+ENTER
+DELAY 1000
+
+REM Navigate to Desktop and set up variables
+STRING cd $env:USERPROFILE\Desktop
+ENTER
+DELAY 500
+STRING $targetRoot = ".\Organized"
+ENTER
+DELAY 500
+
+REM Create main organization directory
+STRING New-Item -Path $targetRoot -ItemType Directory -Force | Out-Null
+ENTER
+DELAY 500
+
+REM Function to organize files by extension
+STRING function Organize-Files {
+ENTER
+STRING     Get-ChildItem -File | ForEach-Object {
+ENTER
+STRING         $ext = if ($_.Extension) { $_.Extension.TrimStart('.') } else { "no_extension" }
+ENTER
+STRING         $targetDir = Join-Path $targetRoot $ext
+ENTER
+STRING         if (!(Test-Path $targetDir)) {
+ENTER
+STRING             New-Item -Path $targetDir -ItemType Directory -Force | Out-Null
+ENTER
+STRING         }
+ENTER
+STRING         $newPath = Join-Path $targetDir $_.Name
+ENTER
+STRING         Move-Item $_.FullName -Destination $newPath -Force
+ENTER
+STRING         Write-Host "Moved $($_.Name) to $newPath"
+ENTER
+STRING     }
+ENTER
+STRING }
+ENTER
+DELAY 500
+
+REM Execute the function
+STRING Organize-Files
+ENTER
+DELAY 5000
+
+REM Clean up empty directories
+STRING Get-ChildItem $targetRoot -Directory | Where-Object { (Get-ChildItem $_ -Recurse | Measure-Object).Count -eq 0 } | Remove-Item
+ENTER
+DELAY 1000
+
+REM Display completion message
+STRING Write-Host "File organization complete. Check the 'Organized' folder."
+ENTER
+DELAY 500
+
+REM Keep the window open
+STRING Read-Host -Prompt "Press Enter to exit"
+ENTER
